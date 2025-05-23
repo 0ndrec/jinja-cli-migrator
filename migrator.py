@@ -8,7 +8,7 @@ import shutil
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass
-from jinja2 import Environment, FileSystemLoader, meta, Template
+from jinja2 import Environment, FileSystemLoader, meta, Template, nodes
 from jinja2.exceptions import TemplateError
 import click
 import re
@@ -70,8 +70,10 @@ class JinjaMigrator:
     def _extract_template_info(self, template_path: str) -> Dict[str, Any]:
         """Extract information from existing template"""
         try:
-            template = self.source_env.get_template(template_path)
-            source = template.source
+            # Read the source file directly
+            source_file = Path(self.config.source_dir) / template_path
+            with open(source_file, 'r', encoding='utf-8') as f:
+                source = f.read()
             
             # Parse template to get AST
             ast = self.source_env.parse(source)
@@ -81,18 +83,18 @@ class JinjaMigrator:
             
             # Extract blocks
             blocks = []
-            for node in ast.find_all('Block'):
+            for node in ast.find_all(nodes.Block):
                 blocks.append(node.name)
             
             # Extract extends/includes
             extends = None
             includes = []
             
-            for node in ast.find_all('Extends'):
+            for node in ast.find_all(nodes.Extends):
                 if hasattr(node.template, 'value'):
                     extends = node.template.value
             
-            for node in ast.find_all('Include'):
+            for node in ast.find_all(nodes.Include):
                 if hasattr(node.template, 'value'):
                     includes.append(node.template.value)
             
