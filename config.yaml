@@ -1,0 +1,20 @@
+# Jinja Template Migration Configuration
+
+# Source and target directories
+source_dir: "./old_templates"
+target_dir: "./new_templates"
+
+# New base template to extend from
+new_base_template: "layouts/base.html"
+
+# Patterns to exclude from migration (regex)
+exclude_patterns:
+  - ".*_backup\\.html$"
+  - "temp_.*\\.html$"
+  - "test_.*\\.html$"
+  - ".*\\.tmp$"
+  - "components/deprecated/.*"
+
+# Automation settings
+auto_preserve_blocks: true     # Automatically preserve and map common blocks
+auto_map_variables: false      # Automatically map common variable names
