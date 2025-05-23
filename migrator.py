@@ -430,7 +430,7 @@ class JinjaMigrator:
 
 
 @click.command()
-@click.option('--config', '-c', default='migration_config.yaml',
+@click.option('--config', '-c', default='config.yaml',
               help='Path to migration configuration file')
 @click.option('--dry-run', '-d', is_flag=True,
               help='Show what would be migrated without actually doing it')
