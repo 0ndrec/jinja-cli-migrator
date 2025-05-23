@@ -114,4 +114,5 @@ Migrated templates include:
 
 ## License
 Generated with Sonnet4
+
 MIT License
