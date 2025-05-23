@@ -1,5 +1,7 @@
 # Jinja Template Migrator
 
+![image info](image.png)
+
 Interactive CLI tool for migrating Jinja templates to new design layouts. Automatically analyzes your existing templates and helps you reorganize them with new structure, variable names, and block mappings.
 
 ## Features
