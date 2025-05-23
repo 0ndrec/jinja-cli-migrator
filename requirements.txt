@@ -1,0 +1,4 @@
+Jinja2>=3.0.0
+PyYAML>=6.0
+click>=8.0.0
+pathlib2>=2.3.0

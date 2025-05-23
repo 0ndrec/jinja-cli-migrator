@@ -289,7 +289,7 @@ class JinjaMigrator:
             patterns = [
                 rf'\b{re.escape(old_var)}\b',  # Simple variable
                 rf'{{\s*{re.escape(old_var)}\s*}}',  # Template variable
-                rf'{%[^%]*\b{re.escape(old_var)}\b[^%]*%}',  # In control structures
+                f'{{% [^%]*\\b{re.escape(old_var)}\\b[^%]*%}}',  # In control structures
             ]
             
             for pattern in patterns:
